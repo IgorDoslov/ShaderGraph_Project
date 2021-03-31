@@ -8,7 +8,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public float jumpForce = 10.0f;
     public Rigidbody rb;
     public Animator anim;
-    //public bool isGrounded = true;
+    
 
     public bool Grounded
     {
@@ -50,17 +50,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
             Grounded = false;
             anim.SetBool("IsJumping", false);
         }
-        //if (isGrounded && !CanJump())
-        //{
-        //    isGrounded = true;
-        //    anim.SetBool("IsGrounded", true);
-
-        //}
-        //else if (isGrounded && !CanJump()) // 
-        //{
-        //    isGrounded = false;
-        //    anim.SetBool("IsGrounded", false);
-        //}
+        
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
     }
