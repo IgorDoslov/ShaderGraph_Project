@@ -25,8 +25,6 @@ public class RayCastToButton : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, buttonRange, buttonLayer))
                 hit.transform.GetComponent<Button>().onClick.Invoke();
-            //if (hit.collider == null)
-            //return;
         }
     }
 }

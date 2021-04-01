@@ -9,17 +9,17 @@ public class RayViewer : MonoBehaviour
     private Camera fpsCam;
     RaycastHit hit;
     public GameObject target;
-    public float lerpSpeed = 1000.0f;
+    public float lerpSpeed = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        fpsCam = GetComponentInParent<ThirdPersonCharacterController>().transform.gameObject.GetComponentInChildren<Camera>();
+        //fpsCam = GetComponentInParent<ThirdPersonCharacterController>().transform.gameObject.GetComponentInChildren<Camera>();
         fpsCam = Camera.main;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 lastPos = target.transform.position;
 
@@ -28,12 +28,12 @@ public class RayViewer : MonoBehaviour
         Debug.DrawRay(lineOrigin, fpsCam.transform.forward * weaponRange, Color.green);
 
         if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
-        { target.transform.position = Vector3.Lerp(lastPos, hit.point, lerpSpeed * Time.deltaTime); }
+        { target.transform.position = Vector3.Lerp(lastPos, hit.point, lerpSpeed * Time.fixedDeltaTime); }
         else
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, weaponRange);
-            target.transform.position = Vector3.Lerp(lastPos, ray.GetPoint(weaponRange), lerpSpeed * Time.deltaTime);
+            target.transform.position = Vector3.Lerp(lastPos, ray.GetPoint(weaponRange), lerpSpeed * Time.fixedDeltaTime);
         }
     }
 }
